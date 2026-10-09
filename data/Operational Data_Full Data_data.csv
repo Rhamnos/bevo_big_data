@@ -1,0 +1,24 @@
+﻿Column,Important or Not?,Explanation
+Month,,Operation Month
+FRA Region,,FRA Region
+FRA Safety Management Team,,FRA Safety Management Team
+Holding Company,,Holding Company
+Parent Railroad,,Parent Railroad
+Railroad,,Railroad
+Shortline or Class I,,Shortline or Class I
+Railroad Class,,Railroad Class
+Adjusted Class,,Adjusted Class
+Year,,Year
+Period,,Period
+Railroad Concat,,Railroad Concat
+Railroadcode,,Railroadcode
+Railroadname,,Railroadname
+Reporting Parent Railroad Code,,Reporting Parent Railroad Code
+Reporting Parent Railroad Name,,Reporting Parent Railroad Name
+reporting_railroad_class,,reporting_railroad_class
+Employee Hours Worked,,Employee Hours Worked
+Number of Passengers Transported,,Number of Passengers Transported
+Passenger Miles,,Passenger Miles
+Reports,,Reports
+Total Train Miles,,Total Train Miles
+Yard Switching Miles,,Yard Switching Miles
