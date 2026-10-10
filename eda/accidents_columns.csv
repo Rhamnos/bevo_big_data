@@ -1,0 +1,156 @@
+,0
+0,Reporting Railroad Code
+1,Reporting Railroad Name
+2,Year
+3,Accident Number
+4,PDF Link
+5,Accident Year
+6,Accident Month
+7,Other Railroad Code
+8,Other Railroad Name
+9,Other Accident Number
+10,Other Accident Year
+11,Other Accident Month
+12,Maintenance Railroad Code
+13,Maintenance Railroad Name
+14,Maintenance Accident Number
+15,Maintenance Accident Year
+16,Maintenance Accident Month
+17,Grade Crossing ID
+18,Day
+19,Date
+20,Time
+21,Accident Type Code
+22,Accident Type
+23,Hazmat Cars
+24,Hazmat Cars Damaged
+25,Hazmat Released Cars
+26,Persons Evacuated
+27,Subdivision
+28,Division Code
+29,Division
+30,Station
+31,Milepost
+32,State Code
+33,State Abbreviation
+34,State Name
+35,County Code
+36,County Name
+37,District
+38,Temperature
+39,Visibility Code
+40,Visibility
+41,Weather Condition Code
+42,Weather Condition
+43,Track Type Code
+44,Track Type
+45,Track Name
+46,Track Class
+47,Track Density
+48,Train Direction Code
+49,Train Direction
+50,Equipment Type Code
+51,Equipment Type
+52,Equipment Attended
+53,Train Number
+54,Train Speed
+55,Recorded Estimated Speed
+56,Maximum Speed
+57,Gross Tonnage
+58,Signalization Code
+59,Signalization
+60,Method of Operation Code
+61,Method of Operation
+62,Adjunct Code 1
+63,Adjunct Name 1
+64,Adjunct Code 2
+65,Adjunct Name 2
+66,Adjunct Code 3
+67,Adjunct Name 3
+68,Remote Control Locomotive Code
+69,Remote Control Locomotive
+70,First Car Initials
+71,First Car Number
+72,First Car Position
+73,First Car Loaded
+74,Causing Car Initials
+75,Causing Car Number
+76,Causing Car Position
+77,Causing Car Loaded
+78,Positive Alcohol Tests
+79,Positive Drug Tests
+80,Passengers Transported
+81,Head End Locomotives
+82,Mid Train Manual Locomotives
+83,Mid Train Remote Locomotives
+84,Rear End Manual Locomotives
+85,Rear End Remote Locomotives
+86,Derailed Head End Locomotives
+87,Derailed Mid Train Manual Locomotives
+88,Derailed Mid Train Remote Locomotives
+89,Derailed Rear End Manual Locomotives
+90,Derailed Rear End Remote Locomotives
+91,Loaded Freight Cars
+92,Loaded Passenger Cars
+93,Empty Freight Cars
+94,Empty Passenger Cars
+95,Cabooses
+96,Derailed Loaded Freight Cars
+97,Derailed Loaded Passenger Cars
+98,Derailed Empty Freight Cars
+99,Derailed Empty Passenger Cars
+100,Derailed Cabooses
+101,Equipment Damage Cost
+102,Track Damage Cost
+103,Total Damage Cost
+104,Primary Accident Cause Code
+105,Primary Accident Cause
+106,Contributing Accident Cause Code
+107,Contributing Accident Cause
+108,Accident Cause Code
+109,Accident Cause
+110,Engineers On Duty
+111,Firemen On Duty
+112,Conductors On Duty
+113,Brakemen On Duty
+114,Hours Engineers On Duty
+115,Minutes Engineers On Duty
+116,Hours Conductors On Duty
+117,Minutes Conductors On Duty
+118,Railroad Employees Killed
+119,Railroad Employees Injured
+120,Passengers Killed
+121,Passengers Injured
+122,Others Killed
+123,Others Injured
+124,Reporting Railroad Fatalities for 55a
+125,Reporting Railroad Injuries for 55a
+126,Total Persons Killed
+127,Total Persons Injured
+128,Total Killed Form 54
+129,Total Injured Form 54
+130,Special Study 1
+131,Special Study 2
+132,Latitude
+133,Longitude
+134,Narrative
+135,Joint Track Type
+136,Joint Track Class
+137,Class Code
+138,Class
+139,Joint CD
+140,Incident Key
+141,Report Key
+142,Reporting Railroad Class
+143,Reporting Railroad SMT Grouping
+144,Reporting Parent Railroad Code
+145,Reporting Parent Railroad Name
+146,Reporting Railroad Holding Company
+147,Reporting Railroad Individual Class
+148,Reporting Railroad Passenger
+149,Reporting Railroad Commuter
+150,Reporting Railroad Switching Terminal
+151,Reporting Railroad Tourist
+152,Reporting Railroad Freight
+153,Reporting Railroad Short Line
+154,Location
