@@ -16,8 +16,9 @@ def top_seven_accidents(data):
     clean1["Primary Accident Cause Code"] = clean1["Primary Accident Cause Code"].str.strip().str[0]
     clean2 = clean1.drop_duplicates(subset=["Accident Number"]).copy()
     clean2 = clean2.loc[clean2["Accident Type"].str.strip() == "Derailment"].copy()
-    clean3 = clean2.loc[clean2["Reporting Parent Railroad Code"].isin(parents)]
-    clean3 = clean3.drop(columns=["Accident Number", "Accident Type"])
+    all_parents = clean2["Reporting Parent Railroad Code"].str.strip()
+    clean2["Reporting Parent Railroad Code"] = all_parents.where(all_parents.isin(parents), "other")
+    clean3 = clean2.drop(columns=["Accident Number", "Accident Type"])
     clean3 = (clean3
               .groupby(["Year", "Reporting Parent Railroad Code", "Primary Accident Cause Code"], as_index=False)
               .size()
@@ -30,14 +31,14 @@ def top_seven_accidents(data):
 def top_seven_operations(data):
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     clean1 = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
-    clean1["Reporting Parent Railroad Code"] = (clean1["Reporting Parent Railroad Code"].str.strip())
-    clean2 = clean1.loc[clean1["Reporting Parent Railroad Code"].isin(parents)]
-    clean2["Total Train Miles"] = pd.to_numeric(clean2["Total Train Miles"].str.replace(",", ""))
-    clean3 = (clean2
+    all_parents = clean1["Reporting Parent Railroad Code"].str.strip()
+    clean1["Reporting Parent Railroad Code"] = all_parents.where(all_parents.isin(parents), "other")
+    clean1["Total Train Miles"] = pd.to_numeric(clean1["Total Train Miles"].str.replace(",", ""))
+    clean2 = (clean1
               .groupby(["Year", "Reporting Parent Railroad Code"], as_index = False)["Total Train Miles"]
               .sum()
               )
-    return clean3
+    return clean2
 
 def derailment_rates(accidents, operations):
     merged = accidents.merge(
@@ -51,7 +52,23 @@ def derailment_rates(accidents, operations):
 
 
 df_rates = derailment_rates(top_seven_accidents(df_accidents), top_seven_operations(df_operations))
-print(df_rates)
+
+def change_names(data):
+    df_final = data.rename(columns={
+        "Year": "year",
+        "Reporting Parent Railroad Code": "railroad_ group",
+        "Primary Accident Cause Code": "cause_group",
+        "Total Train Miles": "total_miles",
+    })
+    return df_final
+
+names = change_names(df_rates)
+print(names.dtypes)
+
+
+
+
+
 
 
 # def merge_data(data1, data2):
