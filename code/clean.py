@@ -41,7 +41,13 @@ def clean_accidents(data):
 
 
 def clean_operations(data):
-
+    """
+    Function cleans the operations dataset
+    1. Filters down to necessary columns
+    2. Filter the parent companies to the top 7, all other companies are in other
+    3. Change total train miles to numeric value
+    4. Organiz and aggregate data by year -> by parent company code -> by total train miles
+    """
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     clean1 = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
     all_parents = clean1["Reporting Parent Railroad Code"].str.strip()
@@ -53,6 +59,7 @@ def clean_operations(data):
               )
     return clean2
 
+
 def merge_dfs(accidents, operations):
     merged = accidents.merge(
         operations,
@@ -61,7 +68,9 @@ def merge_dfs(accidents, operations):
     )
     merged["rate_per_million_miles"] = (merged["derailments"] / merged["Total Train Miles"] * 1000000)
 
-    return merged[["Year", "Reporting Parent Railroad Code", "Primary Accident Cause Code", "derailments", "Total Train Miles", "rate_per_million_miles"]]
+    return merged[["Year", "Reporting Parent Railroad Code", 
+                   "Primary Accident Cause Code", "derailments", 
+                   "Total Train Miles", "rate_per_million_miles"]]
 
 
 df_rates = merge_dfs(clean_accidents(df_accidents), clean_operations(df_operations))
