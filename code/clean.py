@@ -10,6 +10,17 @@ df_operations = pd.read_csv(IN_PATH_OPERATIONS)
 
 
 def clean_accidents(data):
+    """
+    Function cleans the accidents data set.
+    1. Filters down to the necessary columns and removes data past 2022
+    2. Changes the accident cause code to the single identifier (M,S,E,T,H)
+    3. Drop the duplicate accident reports
+    4. Filter the accident type to only derailments
+    5. Filter the parent companies to the top 7, all other companies are in other
+    6. Drop Columns that the final output does not need
+    7. Combine the M and S cause codes together by changing all Ss into Ms
+    8. Last step is to organize by year -> by company -> by primary accident cause code
+    """
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     clean1 = data[["Year", "Reporting Parent Railroad Code", "Accident Number", "Accident Type", "Primary Accident Cause Code"]]
     clean1 = clean1.loc[clean1["Year"] <= 2022]
@@ -19,6 +30,7 @@ def clean_accidents(data):
     all_parents = clean2["Reporting Parent Railroad Code"].str.strip()
     clean2["Reporting Parent Railroad Code"] = all_parents.where(all_parents.isin(parents), "other")
     clean3 = clean2.drop(columns=["Accident Number", "Accident Type"])
+    clean3["Primary Accident Cause Code"] = clean3["Primary Accident Cause Code"].replace({"S": "M"})
     clean3 = (clean3
               .groupby(["Year", "Reporting Parent Railroad Code", "Primary Accident Cause Code"], as_index=False)
               .size()
@@ -29,6 +41,7 @@ def clean_accidents(data):
 
 
 def clean_operations(data):
+    
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     clean1 = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
     all_parents = clean1["Reporting Parent Railroad Code"].str.strip()
@@ -65,10 +78,6 @@ def change_names(data):
 
 names = change_names(df_rates)
 print(names)
-
-
-
-
 
 
 
