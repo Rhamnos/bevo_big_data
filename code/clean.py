@@ -9,7 +9,7 @@ df_operations = pd.read_csv(IN_PATH_OPERATIONS)
 
 
 
-def top_seven_accidents(data):
+def clean_accidents(data):
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     clean1 = data[["Year", "Reporting Parent Railroad Code", "Accident Number", "Accident Type", "Primary Accident Cause Code"]]
     clean1 = clean1.loc[clean1["Year"] <= 2022]
@@ -28,7 +28,7 @@ def top_seven_accidents(data):
     return clean3
 
 
-def top_seven_operations(data):
+def clean_operations(data):
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     clean1 = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
     all_parents = clean1["Reporting Parent Railroad Code"].str.strip()
@@ -40,7 +40,7 @@ def top_seven_operations(data):
               )
     return clean2
 
-def derailment_rates(accidents, operations):
+def merge_dfs(accidents, operations):
     merged = accidents.merge(
         operations,
         how="left",
@@ -51,7 +51,7 @@ def derailment_rates(accidents, operations):
     return merged[["Year", "Reporting Parent Railroad Code", "Primary Accident Cause Code", "derailments", "Total Train Miles", "rate_per_million_miles"]]
 
 
-df_rates = derailment_rates(top_seven_accidents(df_accidents), top_seven_operations(df_operations))
+df_rates = merge_dfs(clean_accidents(df_accidents), clean_operations(df_operations))
 
 def change_names(data):
     df_final = data.rename(columns={
@@ -62,8 +62,9 @@ def change_names(data):
     })
     return df_final
 
+
 names = change_names(df_rates)
-print(names.dtypes)
+print(names)
 
 
 
