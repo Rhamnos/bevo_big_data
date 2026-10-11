@@ -23,3 +23,30 @@ def check_repeats(data, column):
     Returns the total amount of values for the given column that are reported more than once.
     """
     return (data[column].value_counts() > 1).sum()
+
+
+unique_railroad = (df_operations["Reporting Parent Railroad Name"]
+                   .dropna()
+                   .str.strip()
+                   .unique()
+)
+unique_railroad_accident = (df_accidents["Reporting Railroad Name"]
+                            .dropna()
+                            .str.strip()
+                            .unique()
+)
+
+a = set(unique_railroad)   
+b = set(unique_railroad_accident)
+
+in_both = a & b      
+only_in_a = a - b      
+only_in_b = b - a      
+
+print(len(in_both), len(only_in_a), len(only_in_b))
+
+print(only_in_b)
+
+
+# def merge_dat(data1, data2):
+#     accidents = df_accidents["Reporting Parent Railroad Code"]
