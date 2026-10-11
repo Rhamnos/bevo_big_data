@@ -38,6 +38,7 @@ def top_seven_operations(data):
               .groupby(["Year", "Reporting Parent Railroad Code"], as_index = False)["Total Train Miles"]
               .sum()
               )
+    clean3["Total Train Miles"] = (clean3["Total Train Miles"] * (1 / 1000000))
     return clean3
 
 
