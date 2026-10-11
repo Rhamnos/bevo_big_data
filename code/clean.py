@@ -8,3 +8,11 @@ df_accidents = pd.read_csv(IN_PATH_ACCIDENTS)
 df_operations = pd.read_csv(IN_PATH_OPERATIONS)
 
 
+def remove_duplicates(data):
+    """
+    Removes the duplicate accidents from the accident dataset
+    """
+    df_cleaned = data.drop_duplicates(subset="Accident Number")
+    return df_cleaned
+
+
