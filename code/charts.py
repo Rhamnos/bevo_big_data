@@ -1,13 +1,14 @@
 import pandas as pd
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 
-def charts_over_time(data_frame):
+
+def charts_over_time(df):
     """take in a pandas data frame. Plot a chart of the accidents per railroad over time"""
-    df = data_frame
+    
     
 
-
-def chats_by_cause(data_frame):
+def charts_by_cause(df):
     """take in a pandas data frame. Plot a chart of the accidents per railroad by cause"""
-    df = data_frame
+
+
