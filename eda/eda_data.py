@@ -16,3 +16,11 @@ OUTPATH_OPERATIONS_COLUMNS = os.path.join("eda", "operations_columns.csv")
 pd.Series(df_accidents.columns).to_csv(OUTPATH_ACCIDENTS_COLUMNS)
 pd.Series(df_operations.columns).to_csv(OUTPATH_OPERATIONS_COLUMNS)
 
+
+def check_repeats(data):
+    """
+    Identify duplicate accident reports by identifying repeat accident numbers.
+    Function returns the total amount of Accident Numbers that are reported more than once.
+    """
+    return (data['Accident Number'].value_counts() > 1).sum()
+
