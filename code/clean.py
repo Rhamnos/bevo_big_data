@@ -17,22 +17,26 @@ def map_company_to_parent():
     pass
 
 
-
 def clean_accidents(data):
-    clean1 = data[["Year", "Reporting Railroad Code", "Accident Number", "Accident Type", "Primary Accident Cause Code"]]
+    clean1 = data[["Year", "Reporting Railroad Code", "Reporting Parent Railroad Code", "Accident Number", "Accident Type", "Primary Accident Cause Code"]]
+    clean1 = clean1.loc[clean1["Year"] <= 2022]
+    clean1["Primary Accident Cause Code"] = clean1["Primary Accident Cause Code"].str.strip().str[0]
     clean2 = clean1.drop_duplicates(subset=["Accident Number"])
     return clean2
 
-def clean_operations(data):
+
+def top_seven_operations(data):
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     clean1 = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
-    clean1["Reporting Parent Railroad Code"] = (clean1["Reporting Parent Railroad Code"].str.strip().str.upper())
+    clean1["Reporting Parent Railroad Code"] = (clean1["Reporting Parent Railroad Code"].str.strip())
     clean2 = clean1.loc[clean1["Reporting Parent Railroad Code"].isin(parents)]
     return clean2
 
+clean = clean_accidents(df_accidents)
+print(clean)
 
-clean = clean_operations(df_operations)
 
-print(len(clean))
-operation_match = check_mismatch(clean)
-print(len(operation_match))
+# clean = clean_operations(df_operations)
+# print(len(clean))
+# operation_match = check_mismatch(clean)
+# print(len(operation_match))
