@@ -36,7 +36,6 @@ def clean_accidents(data):
               .size()
               .rename(columns={"size": "derailments"})
               )
-    # clean3 = clean3.reset_index(drop=True)
     return clean3
 
 
@@ -73,8 +72,6 @@ def merge_dfs(accidents, operations):
                    "Total Train Miles", "rate_per_million_miles"]]
 
 
-df_rates = merge_dfs(clean_accidents(df_accidents), clean_operations(df_operations))
-
 def change_names(data):
     df_final = data.rename(columns={
         "Year": "year",
@@ -85,5 +82,9 @@ def change_names(data):
     return df_final
 
 
-names = change_names(df_rates)
-print(names)
+def clean_and_merge(accidents, operations):
+    accidents_cleaned = clean_accidents(accidents)
+    operations_cleaned = clean_operations(operations)
+    merged_data = merge_dfs(accidents_cleaned, operations_cleaned)
+    final_df = change_names(merged_data)
+    return final_df
