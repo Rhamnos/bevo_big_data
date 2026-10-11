@@ -41,7 +41,7 @@ def clean_accidents(data):
 
 
 def clean_operations(data):
-    
+
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     clean1 = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
     all_parents = clean1["Reporting Parent Railroad Code"].str.strip()
@@ -78,29 +78,3 @@ def change_names(data):
 
 names = change_names(df_rates)
 print(names)
-
-
-
-# def merge_data(data1, data2):
-
-# def final_clean_accidents(data):
-#     rename = data.rename(columns={"Year": "year", 
-#                                   "Reporting Parent Railroad Code": "railroad_group", 
-#                                   "Accident Type": "derailment", "Primary Accident Cause Code": "cause_group"})
-#     final_clean = rename
-#     return final_clean
-
-
-
-
-
-# clean1 = top_seven_accidents(df_accidents)
-# clean2 = top_seven_operations(df_operations)
-# print(clean1)
-# print(clean2)
-
-
-# clean = clean_operations(df_operations)
-# print(len(clean))
-# operation_match = check_mismatch(clean)
-# print(len(operation_match))
