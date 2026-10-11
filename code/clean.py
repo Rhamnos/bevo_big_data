@@ -21,11 +21,10 @@ def top_seven_accidents(data):
     clean3 = (clean3
               .groupby(["Year", "Reporting Parent Railroad Code", "Primary Accident Cause Code"], as_index=False)
               .size()
-              .rename(columns={"size": "Derailments"})
+              .rename(columns={"size": "derailments"})
               )
     # clean3 = clean3.reset_index(drop=True)
     return clean3
-
 
 
 def top_seven_operations(data):
@@ -38,12 +37,21 @@ def top_seven_operations(data):
               .groupby(["Year", "Reporting Parent Railroad Code"], as_index = False)["Total Train Miles"]
               .sum()
               )
-    clean3["Total Train Miles"] = (clean3["Total Train Miles"] * (1 / 1000000))
     return clean3
 
+def derailment_rates(accidents, operations):
+    merged = accidents.merge(
+        operations,
+        how="left",
+        on=["Year", "Reporting Parent Railroad Code"],
+    )
+    merged["rate_per_million_miles"] = (merged["derailments"] / merged["Total Train Miles"] * 1000000)
 
-# def merge_seven(data1, data2)
-    
+    return merged[["Year", "Reporting Parent Railroad Code", "Primary Accident Cause Code", "derailments", "Total Train Miles", "rate_per_million_miles"]]
+
+
+df_rates = derailment_rates(top_seven_accidents(df_accidents), top_seven_operations(df_operations))
+print(df_rates)
 
 
 # def merge_data(data1, data2):
