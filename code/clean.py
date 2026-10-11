@@ -24,6 +24,7 @@ def top_seven_accidents(data):
     clean1["Primary Accident Cause Code"] = clean1["Primary Accident Cause Code"].str.strip().str[0]
     clean2 = clean1.drop_duplicates(subset=["Accident Number"])
     clean3 = clean2.loc[clean2["Reporting Parent Railroad Code"].isin(parents)]
+    clean3 = clean3
     return clean3
 
 
@@ -32,7 +33,16 @@ def top_seven_operations(data):
     clean1 = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
     clean1["Reporting Parent Railroad Code"] = (clean1["Reporting Parent Railroad Code"].str.strip())
     clean2 = clean1.loc[clean1["Reporting Parent Railroad Code"].isin(parents)]
-    return clean2
+    clean2["Total Train Miles"] = pd.to_numeric(clean2["Total Train Miles"].str.replace(",", ""))
+    clean3 = (clean2
+              .groupby(["Year", "Reporting Parent Railroad Code"], as_index = False)["Total Train Miles"]
+              .sum()
+              )
+    return clean3
+
+
+# def merge_seven(data1, data2)
+    
 
 
 # def merge_data(data1, data2):
