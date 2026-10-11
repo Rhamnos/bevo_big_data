@@ -17,10 +17,9 @@ pd.Series(df_accidents.columns).to_csv(OUTPATH_ACCIDENTS_COLUMNS)
 pd.Series(df_operations.columns).to_csv(OUTPATH_OPERATIONS_COLUMNS)
 
 
-def check_repeats(data):
+def check_repeats(data, column):
     """
-    Identify duplicate accident reports by identifying repeat accident numbers.
-    Function returns the total amount of Accident Numbers that are reported more than once.
+    Function used to identify columns with duplicate values
+    Returns the total amount of values for the given column that are reported more than once.
     """
-    return (data['Accident Number'].value_counts() > 1).sum()
-
+    return (data[column].value_counts() > 1).sum()
