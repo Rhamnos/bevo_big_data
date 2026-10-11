@@ -8,14 +8,6 @@ df_accidents = pd.read_csv(IN_PATH_ACCIDENTS)
 df_operations = pd.read_csv(IN_PATH_OPERATIONS)
 
 
-def check_mismatch(data):
-    mismatches = data[data["Railroadcode"] != data["Reporting Parent Railroad Code"]]
-    return mismatches
-
-
-def map_company_to_parent():
-    pass
-
 
 def top_seven_accidents(data):
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
@@ -25,21 +17,15 @@ def top_seven_accidents(data):
     clean2 = clean1.drop_duplicates(subset=["Accident Number"]).copy()
     clean2 = clean2.loc[clean2["Accident Type"].str.strip() == "Derailment"].copy()
     clean3 = clean2.loc[clean2["Reporting Parent Railroad Code"].isin(parents)]
-    clean3 = clean3.drop(columns="Accident Number")
-    clean3 = clean3.reset_index(drop=True)
+    clean3 = clean3.drop(columns=["Accident Number", "Accident Type"])
+    clean3 = (clean3
+              .groupby(["Year", "Reporting Parent Railroad Code", "Primary Accident Cause Code"], as_index=False)
+              .size()
+              .rename(columns={"size": "Derailments"})
+              )
+    # clean3 = clean3.reset_index(drop=True)
     return clean3
 
-
-def final_clean_accidents(data):
-    rename = data.rename(columns={"Year": "year", 
-                                  "Reporting Parent Railroad Code": "railroad_group", 
-                                  "Accident Type": "derailment", "Primary Accident Cause Code": "cause_group"})
-    final_clean = rename
-    return final_clean
-
-seven_acc = top_seven_accidents(df_accidents)
-cleaned = final_clean_accidents(seven_acc)
-print(cleaned)
 
 
 def top_seven_operations(data):
@@ -62,6 +48,12 @@ def top_seven_operations(data):
 
 # def merge_data(data1, data2):
 
+# def final_clean_accidents(data):
+#     rename = data.rename(columns={"Year": "year", 
+#                                   "Reporting Parent Railroad Code": "railroad_group", 
+#                                   "Accident Type": "derailment", "Primary Accident Cause Code": "cause_group"})
+#     final_clean = rename
+#     return final_clean
 
 
 
