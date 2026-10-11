@@ -17,3 +17,4 @@ def remove_duplicates(data, column):
 
 df_accidents_cleaned = remove_duplicates(df_accidents, "Accident Number")
 
+print(df_accidents_cleaned)

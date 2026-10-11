@@ -8,11 +8,31 @@ df_accidents = pd.read_csv(IN_PATH_ACCIDENTS)
 df_operations = pd.read_csv(IN_PATH_OPERATIONS)
 
 
-def remove_duplicates(data, column):
-    """
-    Removes the duplicate accidents from the accident dataset
-    """
-    df_cleaned = data.drop_duplicates(subset=column)
-    return df_cleaned
+def check_mismatch(data):
+    mismatches = data[data["Railroadcode"] != data["Reporting Parent Railroad Code"]]
+    return mismatches
 
-df_accidents_cleaned = remove_duplicates(df_accidents, "Accident Number")
+
+def map_company_to_parent():
+    pass
+
+
+
+def clean_accidents(data):
+    clean1 = data[["Year", "Reporting Railroad Code", "Accident Number", "Accident Type", "Primary Accident Cause Code"]]
+    clean2 = clean1.drop_duplicates(subset=["Accident Number"])
+    return clean2
+
+def clean_operations(data):
+    parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
+    clean1 = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
+    clean1["Reporting Parent Railroad Code"] = (clean1["Reporting Parent Railroad Code"].str.strip().str.upper())
+    clean2 = clean1.loc[clean1["Reporting Parent Railroad Code"].isin(parents)]
+    return clean2
+
+
+clean = clean_operations(df_operations)
+
+print(len(clean))
+operation_match = check_mismatch(clean)
+print(len(operation_match))
