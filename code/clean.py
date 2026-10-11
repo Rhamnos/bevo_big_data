@@ -19,13 +19,27 @@ def map_company_to_parent():
 
 def top_seven_accidents(data):
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
-    clean1 = data[["Year", "Reporting Railroad Code", "Reporting Parent Railroad Code", "Accident Number", "Accident Type", "Primary Accident Cause Code"]]
+    clean1 = data[["Year", "Reporting Parent Railroad Code", "Accident Number", "Accident Type", "Primary Accident Cause Code"]]
     clean1 = clean1.loc[clean1["Year"] <= 2022]
     clean1["Primary Accident Cause Code"] = clean1["Primary Accident Cause Code"].str.strip().str[0]
-    clean2 = clean1.drop_duplicates(subset=["Accident Number"])
+    clean2 = clean1.drop_duplicates(subset=["Accident Number"]).copy()
+    clean2 = clean2.loc[clean2["Accident Type"].str.strip() == "Derailment"].copy()
     clean3 = clean2.loc[clean2["Reporting Parent Railroad Code"].isin(parents)]
-    clean3 = clean3
+    clean3 = clean3.drop(columns="Accident Number")
+    clean3 = clean3.reset_index(drop=True)
     return clean3
+
+
+def final_clean_accidents(data):
+    rename = data.rename(columns={"Year": "year", 
+                                  "Reporting Parent Railroad Code": "railroad_group", 
+                                  "Accident Type": "derailment", "Primary Accident Cause Code": "cause_group"})
+    final_clean = rename
+    return final_clean
+
+seven_acc = top_seven_accidents(df_accidents)
+cleaned = final_clean_accidents(seven_acc)
+print(cleaned)
 
 
 def top_seven_operations(data):
@@ -53,10 +67,10 @@ def top_seven_operations(data):
 
 
 
-clean1 = top_seven_accidents(df_accidents)
-clean2 = top_seven_operations(df_operations)
-print(clean1)
-print(clean2)
+# clean1 = top_seven_accidents(df_accidents)
+# clean2 = top_seven_operations(df_operations)
+# print(clean1)
+# print(clean2)
 
 
 # clean = clean_operations(df_operations)
