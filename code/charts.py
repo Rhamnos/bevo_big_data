@@ -21,10 +21,11 @@ def charts_over_time(df, output_path):
         ax.plot(rate_per_year.index, rate_per_year[railroad], marker = "o", label = railroad, color = line_color)
 
 
-    ax.set_title("Derailments per million miles by railroad")
+    ax.set_title("Derailments Per Million Miles by Railroad")
     ax.set_xlabel("Year")
-    ax.set_ylabel("Derailments per million miles")
-    ax.legend()
+    ax.set_ylabel("Derailments Per Million Miles")
+    ax.set_ylim(bottom=0)
+    ax.legend(loc = "upper left", bbox_to_anchor = (1.02,1))
 
     fig.savefig(output_path, dpi=150, bbox_inches="tight")
 
