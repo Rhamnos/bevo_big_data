@@ -26,9 +26,17 @@ def charts_over_time(df, output_path):
     ax.legend(loc = "upper left", bbox_to_anchor = (1.02,1))
 
     fig.savefig(output_path, dpi=150, bbox_inches="tight")
+    
+    # Improve chart appearance
+    ax.title.set_fontsize(14)
+    ax.title.set_fontweight("bold")
+    ax.grid(axis="y", linestyle="--", alpha=0.3)
+    ax.set_axisbelow(True)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
 
     plt.close(fig)
-
+    
 
     return
 
@@ -55,6 +63,14 @@ def charts_by_cause(df, output_path):
     ax.set_ylabel("Derailment per Million Miles")
     ax.set_ylim(bottom=0)
     ax.legend(loc = "upper left", bbox_to_anchor = (1.02,1))
+
+    # Improve chart appearance
+    ax.title.set_fontsize(14)
+    ax.title.set_fontweight("bold")
+    ax.grid(axis="y", linestyle="--", alpha=0.3)
+    ax.set_axisbelow(True)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
 
     fig.savefig(output_path, dpi=150, bbox_inches="tight")
 
