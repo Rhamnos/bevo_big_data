@@ -49,15 +49,15 @@ def clean_operations(data):
     4. Organiz and aggregate data by year -> by parent company code -> by total train miles
     """
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
-    clean1 = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
-    all_parents = clean1["Reporting Parent Railroad Code"].str.strip()
-    clean1["Reporting Parent Railroad Code"] = all_parents.where(all_parents.isin(parents), "other")
-    clean1["Total Train Miles"] = pd.to_numeric(clean1["Total Train Miles"].str.replace(",", ""))
-    clean2 = (clean1
+    df_filter_columns = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
+    all_parents = df_filter_columns["Reporting Parent Railroad Code"].str.strip()
+    df_filter_columns["Reporting Parent Railroad Code"] = all_parents.where(all_parents.isin(parents), "other")
+    df_filter_columns["Total Train Miles"] = pd.to_numeric(df_filter_columns["Total Train Miles"].str.replace(",", ""))
+    df_operations_clean = (df_filter_columns
               .groupby(["Year", "Reporting Parent Railroad Code"], as_index = False)["Total Train Miles"]
               .sum()
               )
-    return clean2
+    return df_operations_clean
 
 
 def merge_dfs(accidents, operations):
