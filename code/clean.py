@@ -29,7 +29,6 @@ def clean_accidents(data):
     df_filter_year["Primary Accident Cause Code"] = df_filter_year["Primary Accident Cause Code"].str.strip().str[0]
     df_drop_dups = df_filter_year.drop_duplicates(subset=["Accident Number"]).copy()
     df_filter_derailments = df_drop_dups.loc[df_drop_dups["Accident Type"].str.strip() == "Derailment"].copy()
-    # all_parents = clean2["Reporting Parent Railroad Code"].str.strip()
     df_filter_derailments["Reporting Parent Railroad Code"] = all_parents.where(all_parents.isin(parents_7), "other")
     df_drop_col = df_filter_derailments.drop(columns=["Accident Number", "Accident Type"])
     df_drop_col["Primary Accident Cause Code"] = df_drop_col["Primary Accident Cause Code"].replace({"S": "M"})
@@ -39,6 +38,7 @@ def clean_accidents(data):
               .rename(columns={"size": "derailments"})
               )
     return df_accidents_clean
+
 
 def clean_operations(data):
     """
@@ -61,6 +61,11 @@ def clean_operations(data):
 
 
 def merge_dfs(accidents, operations):
+    """
+    Merges the two cleaned datasets on year and reporting parent railroad code
+    Creates a new column that gives the derailments per million miles of operation
+    Ordered by year -> by company -> by train derailment cause 
+    """
     merged = accidents.merge(
         operations,
         how="left",
@@ -74,6 +79,9 @@ def merge_dfs(accidents, operations):
 
 
 def change_names(data):
+    """
+    Changes the names of the merged data set to snake case
+    """
     df_final = data.rename(columns={
         "Year": "year",
         "Reporting Parent Railroad Code": "railroad_group",
@@ -85,6 +93,8 @@ def change_names(data):
 
 def clean_and_merge(accidents, operations):
     """
+    Combines the functions above into one function that cleans and merges the two datasets
+    Output is the final dataset used in the models
     """
     accidents_cleaned = clean_accidents(accidents)
     operations_cleaned = clean_operations(operations)
