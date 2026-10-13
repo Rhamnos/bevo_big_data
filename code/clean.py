@@ -40,9 +40,6 @@ def clean_accidents(data):
               )
     return df_accidents_clean
 
-accidents_clean = clean_accidents(df_accidents)
-print(accidents_clean)
-
 def clean_operations(data):
     """
     Function cleans the operations dataset
