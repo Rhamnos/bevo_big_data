@@ -101,3 +101,7 @@ def clean_and_merge(accidents, operations):
     merged_data = merge_dfs(accidents_cleaned, operations_cleaned)
     final_df = change_names(merged_data)
     return final_df
+
+
+cleaned = clean_and_merge(df_accidents, df_operations)
+print(cleaned)
