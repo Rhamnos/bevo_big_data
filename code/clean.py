@@ -21,23 +21,27 @@ def clean_accidents(data):
     7. Combine the M and S cause codes together by changing all Ss into Ms
     8. Last step is to organize by year -> by company -> by primary accident cause code
     """
-    parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
-    clean1 = data[["Year", "Reporting Parent Railroad Code", "Accident Number", "Accident Type", "Primary Accident Cause Code"]]
-    clean1 = clean1.loc[clean1["Year"] <= 2022]
-    clean1["Primary Accident Cause Code"] = clean1["Primary Accident Cause Code"].str.strip().str[0]
-    clean2 = clean1.drop_duplicates(subset=["Accident Number"]).copy()
-    clean2 = clean2.loc[clean2["Accident Type"].str.strip() == "Derailment"].copy()
-    all_parents = clean2["Reporting Parent Railroad Code"].str.strip()
-    clean2["Reporting Parent Railroad Code"] = all_parents.where(all_parents.isin(parents), "other")
-    clean3 = clean2.drop(columns=["Accident Number", "Accident Type"])
-    clean3["Primary Accident Cause Code"] = clean3["Primary Accident Cause Code"].replace({"S": "M"})
-    clean3 = (clean3
+    parents_7 = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
+    all_parents = data["Reporting Parent Railroad Code"].str.strip()
+
+    df_filter_col = data[["Year", "Reporting Parent Railroad Code", "Accident Number", "Accident Type", "Primary Accident Cause Code"]]
+    df_filter_year = df_filter_col.loc[df_filter_col["Year"] <= 2022]
+    df_filter_year["Primary Accident Cause Code"] = df_filter_year["Primary Accident Cause Code"].str.strip().str[0]
+    df_drop_dups = df_filter_year.drop_duplicates(subset=["Accident Number"]).copy()
+    df_filter_derailments = df_drop_dups.loc[df_drop_dups["Accident Type"].str.strip() == "Derailment"].copy()
+    # all_parents = clean2["Reporting Parent Railroad Code"].str.strip()
+    df_filter_derailments["Reporting Parent Railroad Code"] = all_parents.where(all_parents.isin(parents_7), "other")
+    df_drop_col = df_filter_derailments.drop(columns=["Accident Number", "Accident Type"])
+    df_drop_col["Primary Accident Cause Code"] = df_drop_col["Primary Accident Cause Code"].replace({"S": "M"})
+    df_accidents_clean = (df_drop_col
               .groupby(["Year", "Reporting Parent Railroad Code", "Primary Accident Cause Code"], as_index=False)
               .size()
               .rename(columns={"size": "derailments"})
               )
-    return clean3
+    return df_accidents_clean
 
+accidents_clean = clean_accidents(df_accidents)
+print(accidents_clean)
 
 def clean_operations(data):
     """
@@ -83,6 +87,8 @@ def change_names(data):
 
 
 def clean_and_merge(accidents, operations):
+    """
+    """
     accidents_cleaned = clean_accidents(accidents)
     operations_cleaned = clean_operations(operations)
     merged_data = merge_dfs(accidents_cleaned, operations_cleaned)
