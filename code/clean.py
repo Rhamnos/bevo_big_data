@@ -75,7 +75,7 @@ def merge_dfs(accidents, operations):
 def change_names(data):
     df_final = data.rename(columns={
         "Year": "year",
-        "Reporting Parent Railroad Code": "railroad_ group",
+        "Reporting Parent Railroad Code": "railroad_group",
         "Primary Accident Cause Code": "cause_group",
         "Total Train Miles": "total_miles",
     })
