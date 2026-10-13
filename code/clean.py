@@ -11,7 +11,7 @@ df_operations = pd.read_csv(IN_PATH_OPERATIONS)
 
 def clean_accidents(data):
     """
-    Function cleans the accidents data set.
+    Cleans the accidents data set.
     1. Filters down to the necessary columns and removes data past 2022
     2. Changes the accident cause code to the single identifier (M,S,E,T,H)
     3. Drop the duplicate accident reports
@@ -42,7 +42,7 @@ def clean_accidents(data):
 
 def clean_operations(data):
     """
-    Function cleans the operations dataset
+    Cleans the operations dataset
     1. Filters down to necessary columns
     2. Filter the parent companies to the top 7, all other companies are in other
     3. Change total train miles to numeric value
