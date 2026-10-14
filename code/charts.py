@@ -1,7 +1,8 @@
+import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import PercentFormatter
 from rates import calculate_period_rates
-from pandas import pd
+
 
 def charts_over_time(df, output_path):
     """take in a pandas data frame [railroad_group, year, rate_per_million_miles].
@@ -77,7 +78,7 @@ def plot_change_chart(change_table, output_path):
     early_denominator = early_table.replace(0, float("nan"))
     change_table = (late_table - early_table) / early_denominator * 100
 
-    cause_names = {"E": "Equipment", "H": "Human factors", "M": "Misc. + signal", "T": "Track"}
+    cause_names = {"E": "Electrical/Mechanical", "H": "Human factors", "M": "Misc. + signal", "T": "Track"}
     change_table = change_table.rename(columns=cause_names, index={"other": "Other"})
 
     # Select each railroad's overall totals for the two rows below the chart.
