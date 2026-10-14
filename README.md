@@ -28,3 +28,8 @@ The two datasets serve different purposes and must be processed separately befor
 To connect both dataset is needed to use “Railroad Name” column
 A key limitation is that Operational Data 1.02 is published at the national level according to its documentation. Therefore, regional derailment rates require operational exposure data broken down by the corresponding FRA regions. If suitable regional train-mile data are unavailable, national-level rates can still be calculated, but they cannot be interpreted as regional rates. The project will document this limitation and adjust the analysis to match the geographic resolution supported by the data.
 The data dictionaries and source documentation will be used to interpret variables, identify missing information, and document the assumptions applied during data cleaning and analysis.
+
+
+### Limitations
+
+From Will: Percent changes assume a non-zero early-period rate, and NJT's small counts make the percentages volatile compared to the other railroads.
