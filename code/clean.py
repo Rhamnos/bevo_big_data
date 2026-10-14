@@ -11,15 +11,8 @@ df_operations = pd.read_csv(IN_PATH_OPERATIONS)
 
 def clean_accidents(data):
     """
-    Cleans the accidents data set.
-    1. Filters down to the necessary columns and removes data past 2022
-    2. Changes the accident cause code to the single identifier (M,S,E,T,H)
-    3. Drop the duplicate accident reports
-    4. Filter the accident type to only derailments
-    5. Filter the parent companies to the top 7, all other companies are in other
-    6. Drop Columns that the final output does not need
-    7. Combine the M and S cause codes together by changing all Ss into Ms
-    8. Last step is to organize by year -> by company -> by primary accident cause code
+    Cleans the accidents data set by filtering to specific columns, years, and accident types.
+    Final output is a dataframe with total accidents by cause code by company by year.
     """
     parents_7 = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     all_parents = data["Reporting Parent Railroad Code"].str.strip()
@@ -42,11 +35,9 @@ def clean_accidents(data):
 
 def clean_operations(data):
     """
-    Cleans the operations dataset
-    1. Filters down to necessary columns
-    2. Filter the parent companies to the top 7, all other companies are in other
-    3. Change total train miles to numeric value
-    4. Organiz and aggregate data by year -> by parent company code -> by total train miles
+    Cleans the operations dataset, filters the parent companies to the top 7 
+    with the largest operation volume and every other company is aggregated into "other".
+    Final output is total train miles by company by year.
     """
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     df_filter_columns = data[["Year", "Railroadcode", "Reporting Parent Railroad Code", "Total Train Miles"]].copy()
@@ -101,3 +92,6 @@ def clean_and_merge(accidents, operations):
     merged_data = merge_dfs(accidents_cleaned, operations_cleaned)
     final_df = change_names(merged_data)
     return final_df
+
+clean = clean_and_merge(df_accidents, df_operations)
+print(clean)
