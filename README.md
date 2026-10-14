@@ -33,3 +33,14 @@ The data dictionaries and source documentation will be used to interpret variabl
 ### Limitations
 
 From Will: Percent changes assume a non-zero early-period rate, and NJT's small counts make the percentages volatile compared to the other railroads.
+NJTR has a small count and is a passenger vs the other majors are freight
+percent change assumes a non-zero early rate
+"per million miles" includes yard switching.
+
+### Methodology
+From Will: Rate = derailments / (Total Train Miles(TTM)/1,000,000) TTM includes Yard Switching Miles.
+Groups: tope 7 railroads by parent company plus other (BNSF, UP, NS, CSX, CPKC, CN, NJTR)
+Rate over time = one rate per railroad per year, summed of the four cause rates.
+causes by railroad: years combined, derailments summed over years/ miles summed over years. Each railroad-year's miles counted once.
+change chart - '14 - '16 vs -'20 - '22 rates, percent change = (late-early)/early * 100
+cause groups: Signal merged with miscellaneous due to low numbers - would not be significantly shown if kept separate.
