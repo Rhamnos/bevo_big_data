@@ -53,9 +53,9 @@ def clean_operations(data):
 
 def merge_dfs(accidents, operations):
     """
-    Merges the two cleaned datasets on year and reporting parent railroad code
-    Creates a new column that gives the derailments per million miles of operation
-    Ordered by year -> by company -> by train derailment cause 
+    Merges the two cleaned dataframes on year and reporting parent railroad code
+    Creates column that gives the total derailments by cause per million miles of operation within a given year.
+    Returns dataframe organized by rate per million miles by cause group by company by year.
     """
     merged = accidents.merge(
         operations,
@@ -85,7 +85,7 @@ def change_names(data):
 def clean_and_merge(accidents, operations):
     """
     Combines the functions above into one function that cleans and merges the two datasets
-    Output is the final dataset used in the models
+    Returns dataframe organized by rate per million miles by cause group by company by year.
     """
     accidents_cleaned = clean_accidents(accidents)
     operations_cleaned = clean_operations(operations)
