@@ -36,17 +36,16 @@ unique_railroad_accident = (df_accidents["Reporting Railroad Name"]
                             .unique()
 )
 
-a = set(unique_railroad)   
-b = set(unique_railroad_accident)
 
-in_both = a & b      
-only_in_a = a - b      
-only_in_b = b - a      
+def check_unique_(df1, df2):
+    """
+    Function used to identify which parent companies are in each dataset
+    Use variables above
+    """
+    a = set(df1)   
+    b = set(df2)
+    in_both = a & b
+    only_in_a = a - b
+    only_in_b = b - a
+    return f"In both: {len(in_both)}, only in a: {len(only_in_a)} only in b: {len(only_in_b)}"
 
-print(len(in_both), len(only_in_a), len(only_in_b))
-
-print(only_in_b)
-
-
-# def merge_dat(data1, data2):
-#     accidents = df_accidents["Reporting Parent Railroad Code"]
