@@ -98,7 +98,7 @@ The functions that build the graphs can be found in `charts.py`, each of them ta
 ## Limitations
 - A key limitation is that Operational Data 1.02 is published per railroad according to the data. Therefore, regional derailment rates require operational exposure data broken down by the corresponding FRA regions. If suitable regional train-mile data are unavailable, per-railroad rates can still be calculated, but they cannot be interpreted as regional rates. The project will document this limitation and adjust the analysis to match the geographic resolution supported by the data.
 - Miles by state, region, or line do not exist and so accident data cannot be used alongside operational data to find geographical differences.
-- Amtrak, the national passenger railroad service, is not included in the data set
+- Amtrak, the national passenger railroad service, is included in other railroad accident data and is merged with other because each reporting parent railroad was done by another company.
 - Only accidents above a certain amount are reported to the FRA. If it's below the set threshold per year (10,500-11,300 depending on the year).
 - Percent changes assume a non-zero early-period rate, and NJT's small counts make the percentages volatile compared to the other railroads.
 - NJTR has a small absolute count and is a passenger railroad with different behavior than the other major railroads.
@@ -109,3 +109,4 @@ The functions that build the graphs can be found in `charts.py`, each of them ta
 ## Extensions to the Analysis
  - We had to exclude a regional comparison of accident data over time due to how each railroad reports their operational statistics to the FRA. However, using the FRA Crossing Inventory dataset, we could potentially estimate operational data to where it occurred per railroad across years. This dataset includes the railroad crossing information for trains that move over a specific piece of track within a given year. It includes the railroad, the state and county, the trains, and the year the count was taken. Combining this with segment lengths info gives an estimate of train miles per railroad per state. This would allow us to compare accident statistics per million miles per railroad for a given region. Another possible route is to get the operational data directly from the railroads but this is not normally public.
  - Further analysis is also possible by comparing the accidents consisting of mostly remote polited trains or train lines vs less automated trains. The question given is what overall effect of teams of humans (including the size of those teams) has on the accident rate for each railroad.
+ - Separating out Amtrak as am eighth major railroad. 
