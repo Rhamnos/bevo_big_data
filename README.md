@@ -1,5 +1,7 @@
 # bevo_big_data
 
+# An Analysis of Train Derailments for Major U.S. Railroad Companies 
+
 ## Goal
 Question: How do derailment rates in the US per million train miles change across railroads from 2014 to 2022 and what caused them?
 
@@ -44,8 +46,15 @@ The function `merge_dfs` takes in the two new data frames created in the cleanin
 The `change_names` function converts each of the column names from the original dataset into snake case. The final function `clean_and_merge` combines the previous functions into one callable function that takes both of the uncleaned data frames as inputs and produces the final cleaned and merged data frame.
 
 ### Graphing the Data
-From Josh: Include Description of graphing
+The functions that build the graphs can be found in `charts.py`, each of them takes in the final cleaned dataframe that `clean.py` returns and saves the charts as .png files to the artifacts folder. The function `charts_over_time` plots the derailment rate per million miles by railroad company over time. The function `charts_by_cause` provides a breakdown of the derailment rates per million miles by cause for each company. The function `plot_change_chart` provides a visual description of the percent change in railroad derailment rates between two periods (2014-16 and 2020-22). These rates are broken down by company and accident cause. 
 
+## Methodology
+- Rate = derailments / (Total Train Miles(TTM)/1,000,000) TTM includes Yard Switching Miles.
+- Groups: top 7 railroads by parent company plus other (BNSF, UP, NS, CSX, CPKC, CN, NJTR)
+- Rate over time = one rate per railroad per year, summed of the four cause rates.
+- Cause by railroad: years combined, derailments summed over years/ miles summed over years. Each railroad-year's miles counted once.
+- Change chart - '14 - '16 vs -'20 - '22 rates, percent change = (late-early)/early * 100
+- Cause groups: Signal merged with miscellaneous due to low numbers - would not be significantly shown if kept separate.
 
 ## Findings
 ![Derailments per million train miles by railroad, 2014-2022](artifacts/derailments_over_time.png)
@@ -53,22 +62,16 @@ From Josh: Include Description of graphing
 ![Change in rate of derailments by railroad from early period to late period](artifacts/changes_between_periods.png)
 
 
-
-
-## Methodology
-From Will: Rate = derailments / (Total Train Miles(TTM)/1,000,000) TTM includes Yard Switching Miles.
-Groups: tope 7 railroads by parent company plus other (BNSF, UP, NS, CSX, CPKC, CN, NJTR)
-Rate over time = one rate per railroad per year, summed of the four cause rates.
-causes by railroad: years combined, derailments summed over years/ miles summed over years. Each railroad-year's miles counted once.
-change chart - '14 - '16 vs -'20 - '22 rates, percent change = (late-early)/early * 100
-cause groups: Signal merged with miscellaneous due to low numbers - would not be significantly shown if kept separate.
-
 ## Limitations
 - A key limitation is that Operational Data 1.02 is published per railroad according to the data. Therefore, regional derailment rates require operational exposure data broken down by the corresponding FRA regions. If suitable regional train-mile data are unavailable, per-railroad rates can still be calculated, but they cannot be interpreted as regional rates. The project will document this limitation and adjust the analysis to match the geographic resolution supported by the data.
 - Miles by state, region, or line do not exist and so accident data cannot be used alongside operational data to find geographical differences.
 - Amtrak, the national passenger railroad service, is not included in the data set
-- Only accidents above a certain amount are reported to the FRA. If it's below the set threshold per year ($10,500-$11,300 depending on the year).
+- Only accidents above a certain amount are reported to the FRA. If it's below the set threshold per year (10,500-11,300 depending on the year).
 - Percent changes assume a non-zero early-period rate, and NJT's small counts make the percentages volatile compared to the other railroads.
 - NJTR has a small absolute count and is a passenger railroad with different behavior than the other major railroads.
 - The percent change in the period comparison graph assumes a non-zero early rate.
 - "Per million miles" for all statistics includes yard switching miles.
+- The railroads are self-reporting 
+
+## Extensions to the Analysis
+ - We had to exclude a regional comparison of accident data over time due to how each railroad reports their operational statistics to the FRA. However, using the FRA Crossing Inventory dataset, we could potentially estimate operational data to where it occurred per railroad across years. This dataset includes the railroad crossing information for trains that move over a specific piece of track within a given year. It includes the railroad, the state and county, the trains, and the year the count was taken. Combining this with segment lengths info gives an estimate of train miles per railroad per state. This would allow us to compare accident statistics per million miles per railroad for a given region. Another possible route is to get the operational data directly from the railroads but this is not normally public.
