@@ -32,7 +32,7 @@ This project uses two datasets provided by the Federal Railroad Administration (
 - The data dictionaries and source documentation will be used to interpret variables, identify missing information, and document the assumptions applied during data cleaning and analysis.
 
 ## Reproducing the Analysis
-All required packages are located in the requirements.txt file. To run the entire analysis in one step (cleaning data, merging data, and building the graphs) you can run the `fra_clean.py` file located in the code folder. From the project directory `python code/fra_clean.py`. Below we explain the separate files and functions that make up `fra_clean.py`.
+All required packages are located in the requirements.txt file. To run the entire analysis in one step (cleaning data, merging data, and building the graphs) you can run the `FRA_clean.py` file located in the code folder. From the project directory `python code/FRA_clean.py`. Below we explain the separate files and functions that make up `FRA_clean.py`.
 
 ### Cleaning and Merging the Data
 The two datasets used in this project are the FRA Rail Equipment Accident/Incident Data and the FRA Operational Data. These datasets can be found under the data folder within this repository or can be downloaded from the FRA website directly (linked above). The `clean.py` file converts both data sets into pandas data frames, cleans them, and merges them into one data frame containing the columns "year", "railroad_group", "cause_group", "derailments", "total miles", and "rate_per_million_miles". 
