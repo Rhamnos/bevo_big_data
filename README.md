@@ -66,6 +66,7 @@ The functions that build the graphs can be found in `charts.py`, each of them ta
 - Cause by railroad: years combined, derailments summed over years/ miles summed over years. Each railroad-year's miles counted once.
 - Change chart - '14 - '16 vs -'20 - '22 rates, percent change = (late-early)/early * 100
 - Cause groups: Signal merged with miscellaneous due to low numbers - would not be significantly shown if kept separate.
+- How derailment rates change over periods: early period rate = total early miles/ total accident rate; later period rate = total late miles/ total accident rate; (late period rate/ early period rate) / early period rate
 
 ## Findings
 ![Derailments per million train miles by railroad, 2014-2022](artifacts/derailments_over_time.png)
@@ -83,7 +84,7 @@ The functions that build the graphs can be found in `charts.py`, each of them ta
 - CSX and UP had a massive swing in derailments caused by human factors.
 - NS had a large swing in derailments caused by their locomotives or cars.
 - NJTR had the wildest swings across all cateogories but has the lowest number of both absolute and relative derailments, meaning any small change leads to huge swings in changes of rates.
-#### How derailment rates changed (late period rate / early period rate) / early period rate)
+#### How derailment rates changed (late period rate / early period rate) / early period rate
 - UP: +32%
 - CN: +22%
 - CSX: +21%
