@@ -3,8 +3,9 @@ import pandas as pd
 
 def clean_accidents(data):
     """
-    Cleans the accidents data set by filtering to specific columns, years, and accident types.
-    Final output is a dataframe with total accidents by cause code by company by year.
+    Cleans the accidents data set by filtering to specific columns, years, and 
+    accident types. Final output is a dataframe with total accidents by cause 
+    code by company by year.
     """
     parents_7 = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     all_parents = data["Reporting Parent Railroad Code"].str.strip()
@@ -52,8 +53,8 @@ def clean_accidents(data):
 def clean_operations(data):
     """
     Cleans the operations dataset, filters the parent companies to the top 7
-    with the largest operation volume and every other company is aggregated into "other".
-    Final output is total train miles by company by year.
+    with the largest operation volume and every other company is aggregated 
+    into "other". Final output is total train miles by company by year.
     """
     parents = ["BNSF", "UP", "NS", "CSX", "CPKC", "CN", "NJTR"]
     df_filter_columns = data[
@@ -75,8 +76,9 @@ def clean_operations(data):
 def merge_dfs(accidents, operations):
     """
     Merges the two cleaned dataframes on year and reporting parent railroad code
-    Creates column that gives the total derailments by cause per million miles of operation within a given year.
-    Returns dataframe organized by rate per million miles by cause group by company by year.
+    Creates column that gives the total derailments by cause per million miles of 
+    operation within a given year.Returns dataframe organized by rate per 
+    million miles by cause group by company by year.
     """
     merged = accidents.merge(
         operations,
@@ -116,8 +118,9 @@ def change_names(data):
 
 def clean_and_merge(accidents, operations):
     """
-    Combines the functions above into one function that cleans and merges the two datasets
-    Returns dataframe organized by rate per million miles by cause group by company by year.
+    Combines the functions above into one function that cleans and merges 
+    the two datasets Returns dataframe organized by rate per million miles 
+    by cause group by company by year.
     """
     accidents_cleaned = clean_accidents(accidents)
     operations_cleaned = clean_operations(operations)
