@@ -26,17 +26,19 @@ This project uses two datasets provided by the Federal Railroad Administration (
 - In this project, Operational Data 1.02 is used as the source of operational exposure data. The goal is to calculate derailment rates per million train miles and compare accident patterns over time and, where the available data support it, across railroads.
 - The operational dataset complements the Form 54 records by providing a denominator for rate calculations, allowing the analysis to consider not only the number of derailments but also the amount of railroad activity.
 
-### Data Integration and Limitations
+### Data Integration
 - The two datasets serve different purposes and must be processed separately before they can be combined. Accident records are event-based, whereas operational statistics summarize railroad activity over a defined reporting period. Before calculating rates, the project must ensure that the accident counts and train-mile totals refer to compatible time periods and populations of railroad operations.
-- To connect both dataset is needed to use “Parent Railroad Code” + "Year" column
-- A key limitation is that Operational Data 1.02 is published per railroad according to its documentation. Therefore, regional derailment rates require operational exposure data broken down by the corresponding FRA regions. If suitable regional train-mile data are unavailable, per-railroad rates can still be calculated, but they cannot be interpreted as regional rates. The project will document this limitation and adjust the analysis to match the geographic resolution supported by the data.
+- To connect both datasets, we joined the railroad group and year, after each table is aggregated.
 - The data dictionaries and source documentation will be used to interpret variables, identify missing information, and document the assumptions applied during data cleaning and analysis.
-- Miles by state, region, or line do not exist and so accident data cannot be used alongside operational data to find geographical differences.
-- Amtrak, the national passenger railroad service, is not included in the data set
-- Only accidents above a certain amount are reported to the FRA. If it's below the set threshold per year ($10,500-$11,300 depending on the year).
+
 
 ### Findings
-
+![Derailments per million train miles by railroad, 2014-2022]
+(artifacts/derailments_over_time.png)
+![Derailments per million train miles by railroad]
+(artifacts/derailments_by_cause.png)
+![Change in rate of derailments by railroad from early period to late period]
+(artifacts/changes_between_periods.png)
 
 
 
@@ -50,8 +52,11 @@ change chart - '14 - '16 vs -'20 - '22 rates, percent change = (late-early)/earl
 cause groups: Signal merged with miscellaneous due to low numbers - would not be significantly shown if kept separate.
 
 ### Limitations
-- 
-From Will: Percent changes assume a non-zero early-period rate, and NJT's small counts make the percentages volatile compared to the other railroads.
-NJTR has a small count and is a passenger vs the other majors are freight
-percent change assumes a non-zero early rate
-"per million miles" includes yard switching.
+- A key limitation is that Operational Data 1.02 is published per railroad according to the data. Therefore, regional derailment rates require operational exposure data broken down by the corresponding FRA regions. If suitable regional train-mile data are unavailable, per-railroad rates can still be calculated, but they cannot be interpreted as regional rates. The project will document this limitation and adjust the analysis to match the geographic resolution supported by the data.
+- Miles by state, region, or line do not exist and so accident data cannot be used alongside operational data to find geographical differences.
+- Amtrak, the national passenger railroad service, is not included in the data set
+- Only accidents above a certain amount are reported to the FRA. If it's below the set threshold per year ($10,500-$11,300 depending on the year).
+- Percent changes assume a non-zero early-period rate, and NJT's small counts make the percentages volatile compared to the other railroads.
+- NJTR has a small absolute count and is a passenger railroad with different behavior than the other major railroads.
+- The percent change in the period comparison graph assumes a non-zero early rate.
+- "Per million miles" for all statistics includes yard switching miles.
