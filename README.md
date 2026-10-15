@@ -45,7 +45,7 @@ This project uses two datasets provided by the Federal Railroad Administration (
 - The data dictionaries and source documentation will be used to interpret variables, identify missing information, and document the assumptions applied during data cleaning and analysis.
 
 ## Reproducing the Analysis
-All required packages are located in the requirements.txt file. To run the entire analysis in one step (cleaning data, merging data, and building the graphs) you can run the `FRA_clean.py` file located in the code folder. From the project directory `python code/FRA_clean.py`. Below we explain the separate files and functions that make up `FRA_clean.py`.
+All required packages are located in the requirements.txt file, to install, run pip install -r requirements.txt. To run the entire analysis in one step (cleaning data, merging data, and building the graphs) you can run the `FRA_clean.py` file located in the code folder. From the project directory `python code/FRA_clean.py`. Below we explain the separate files and functions that make up `FRA_clean.py`.
 
 ### Cleaning and Merging the Data
 The two datasets used in this project are the FRA Rail Equipment Accident/Incident Data and the FRA Operational Data. These datasets can be found under the data folder within this repository or can be downloaded from the FRA website directly (linked above). The `clean.py` file converts both data sets into pandas data frames, cleans them, and merges them into one data frame containing the columns "year", "railroad_group", "cause_group", "derailments", "total miles", and "rate_per_million_miles". 
@@ -69,8 +69,19 @@ The functions that build the graphs can be found in `charts.py`, each of them ta
 
 ## Findings
 ![Derailments per million train miles by railroad, 2014-2022](artifacts/derailments_over_time.png)
+- UP consistently has one of the highest rate of derailments for how many train miles they run.
+- NJTR by contrast is one of the lowest.
+- Betewen 2018 and 2019, CSX had one of the largest single year decreases in derailment rates out of any company.
+
 ![Derailments per million train miles by railroad](artifacts/derailments_by_cause.png)
+- For relative size of causes to rates, NJTR is almost entirely human factors.
+- Track derailments made up a large majority of their derailments while the other larger railroads have a more even mix.
+
 ![Change in rate of derailments by railroad from early period to late period](artifacts/changes_between_periods.png)
+- The share of Misc + Signal accidents for CN and CPCK grew dramatically between periods.
+- CSX an UP had a massive swing in derailments caused by human factors.
+- NS had a large swing in derailments caused by their locomotives.
+- NJTR had the wildest swings across all cateogories but has the lowest number of both absolute and relative derailments, meaning any small change leads to huge swings in changes of rates.
 
 
 ## Limitations
@@ -86,3 +97,4 @@ The functions that build the graphs can be found in `charts.py`, each of them ta
 
 ## Extensions to the Analysis
  - We had to exclude a regional comparison of accident data over time due to how each railroad reports their operational statistics to the FRA. However, using the FRA Crossing Inventory dataset, we could potentially estimate operational data to where it occurred per railroad across years. This dataset includes the railroad crossing information for trains that move over a specific piece of track within a given year. It includes the railroad, the state and county, the trains, and the year the count was taken. Combining this with segment lengths info gives an estimate of train miles per railroad per state. This would allow us to compare accident statistics per million miles per railroad for a given region. Another possible route is to get the operational data directly from the railroads but this is not normally public.
+ - Further analysis is also possible by comparing the accidents consisting of mostly remote polited trains or train lines vs less automated trains. The question given is what overall effect of teams of humans (including the size of those teams) has on the accident rate for each railroad.
