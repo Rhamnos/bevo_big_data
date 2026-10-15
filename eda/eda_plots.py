@@ -46,15 +46,15 @@ plt.savefig("eda/eda_artifacts/visibility.png")
 
 
 
-# collision_df = df.groupby("Accident Type").size()
-# print(collision_df)
-# collision_plot = collision_df.plot(
-#     kind="bar",
-#     xlabel= "Collision Type",
-#     ylabel="Total Collisions",
-#     title="Breakdown of Accidents by Type",
-#     fontsize=7,
-#     rot=30,
-# )
+collision_df = df.groupby("Accident Type").size()
+print(collision_df)
+collision_plot = collision_df.plot(
+    kind="bar",
+    xlabel= "Collision Type",
+    ylabel="Total Collisions",
+    title="Breakdown of Accidents by Type",
+    fontsize=7,
+    rot=30,
+)
 
-# plt.savefig("accidents_type.png")
+plt.savefig("eda/eda_artifacts/accidents_type.png")
