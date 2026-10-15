@@ -31,6 +31,21 @@ This project uses two datasets provided by the Federal Railroad Administration (
 - To connect both datasets, we joined the railroad group and year, after each table is aggregated.
 - The data dictionaries and source documentation will be used to interpret variables, identify missing information, and document the assumptions applied during data cleaning and analysis.
 
+# Reproducing the Analysis
+All required packages are located in the requirements.txt file. To run the entire analysis in one step (cleaning data, merging data, and building the graphs) you can run the `fra_clean.py` file located in the code folder. From the project directory `python code/fra_clean.py`. Below we explain the separate files and functions that make up `fra_clean.py`.
+
+## Cleaning and Merging the Data
+The two datasets used in this project are the FRA Rail Equipment Accident/Incident Data and the FRA Operational Data. These datasets can be found under the data folder within this repository or can be downloaded from the FRA website directly (linked above). The `clean.py` file converts both data sets into pandas data frames, cleans them, and merges them into one data frame containing the columns "year", "railroad_group", "cause_group", "derailments", "total miles", and "rate_per_million_miles". 
+### Clean Data
+The first step is to clean and filter both data sets to get them to a point where they can be joined together. The function `clean_accidents` takes in the pandas data frame of the accidents data set labeled `df_accidents` and returns a new data frame that aggregates total derailments by cause, for each of the 8 companies, by year. The function `clean_operations` takes in the pandas data frame of the operations data set labeled `df_operations` and returns a data frame that aggregates total operation miles per company per year.
+### Merge Data
+The function `merge_dfs` takes in the two new data frames created in the cleaning step. It merges the cleaned data on the "year" and "railroad_group" columns. It also adds an additional column "rates_per_million_miles" which gives the rate at which derailments occurred, for a specific cause category, per million miles of operation within a given year for a specific company. 
+### Final Clean
+The `change_names` function converts each of the column names from the original dataset into snake case. The final function `clean_and_merge` combines the previous functions into one callable function that takes both of the uncleaned data frames as inputs and produces the final cleaned and merged data frame.
+
+## Graphing the Data
+From Josh: Include Description of graphing
+
 
 ### Findings
 ![Derailments per million train miles by railroad, 2014-2022](artifacts/derailments_over_time.png)
