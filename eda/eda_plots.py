@@ -2,48 +2,46 @@ import os
 import pandas as pd
 from matplotlib import pyplot as plt
 
-IN_PATH = os.path.join("data", "rail_accident.csv")
+IN_PATH_ACCIDENTS = os.path.join("data", "Rail_Equipment_Accident_Incident_Data_(Form_54)_20261008.csv")
+IN_PATH_OPERATIONS = os.path.join("data", "Operational Data_Full Data_data_Use_This.csv")
 OUT_DIR = "data"
 OUT_PATH = os.path.join(OUT_DIR, "county.csv")
 
-# theme = load_theme("arctic_dark")
-# theme.apply()
 
-df = pd.read_csv(IN_PATH)
+df = pd.read_csv(IN_PATH_ACCIDENTS)
 
 
 
-texas_df = ( 
-    df.loc[df["State Abbreviation"] == "TX"]
-    .groupby(["Year", "Accident Month", "County Name"], as_index=False)["Train Speed"]
-    .mean()
-)
+# texas_df = ( 
+#     df.loc[df["State Abbreviation"] == "TX"]
+#     .groupby(["Year", "Accident Month", "County Name"], as_index=False)["Train Speed"]
+#     .mean()
+# )
 
-texas_year_df = (
-    df.loc[df["State Abbreviation"] == "TX"]
-    .groupby(["Year", "County Name"], as_index=False)["Train Speed"]
-    .mean()            
-)
+# texas_year_df = (
+#     df.loc[df["State Abbreviation"] == "TX"]
+#     .groupby(["Year", "County Name"], as_index=False)["Train Speed"]
+#     .mean()            
+# )
 
 monthly = (
     df.groupby(["Year", "Accident Month"])
     .size()
-    .reset_index(name="collisions")
+    .reset_index(name="accidents")
 )
 
 monthly["date"] = pd.to_datetime(dict(year=monthly["Year"], month=monthly["Accident Month"], day=1))
 monthly = (monthly.set_index("date").sort_index())
 
 
-# plot = monthly["collisions"].plot(
-#     xlabel="Date",
-#     ylabel="Collisions per month",
-#     title="Collisions per month over time",
-#     figsize=(10,7),
-# )
-# plot.set_title("Collisions per month over time", fontsize=20)
-# theme.apply_transforms()
-# plt.savefig("collisions.png")
+plot = monthly["accidents"].plot(
+    xlabel="Date",
+    ylabel="Accidents per month",
+    title="Accidents per month over time",
+    figsize=(10,7),
+)
+plot.set_title("Accidents per month over time", fontsize=20)
+plt.savefig("eda/eda_artifacts/accidents.png")
 
 
 visibility_df = df.groupby("Visibility").size()
@@ -63,21 +61,21 @@ visibility_df = df.groupby("Visibility").size()
 # plt.savefig("visibility.png")
 
 
-state_df = df.groupby("State Abbreviation").size()
+# state_df = df.groupby("State Abbreviation").size()
 
-state_plot = state_df.plot(
-    kind="bar",
-    xlabel= "State",
-    ylabel="Total Accidents",
-    title="Breakdown of Accidents by State",
-    fontsize=10,
-)
-theme.apply_transforms()
-plt.savefig("state_accidents.png")
+# state_plot = state_df.plot(
+#     kind="bar",
+#     xlabel= "State",
+#     ylabel="Total Accidents",
+#     title="Breakdown of Accidents by State",
+#     fontsize=10,
+# )
+# theme.apply_transforms()
+# plt.savefig("state_accidents.png")
 
 
 
-collision_df = df.groupby("Accident Type").size()
+# collision_df = df.groupby("Accident Type").size()
 # print(collision_df)
 # collision_plot = collision_df.plot(
 #     kind="bar",
