@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from clean import clean_and_merge
-from charts import charts_over_time, charts_by_cause
+from charts import charts_over_time, charts_by_cause, plot_change_chart
 
 # Step 1: Define project root
 PROJECT_ROOT = os.path.dirname(
@@ -36,6 +36,10 @@ CHART_CAUSE_PATH = os.path.join(
     OUTPUT_PATH, "derailments_by_cause.png"
 )
 
+CHART_CHANGE_PATH = os.path.join(
+    OUTPUT_PATH, "changes_between_periods.png"
+)
+
 
 def main():
 
@@ -60,6 +64,7 @@ def main():
     # Step 8: Generate and save charts
     charts_over_time(cleaned_data, CHART_TIME_PATH)
     charts_by_cause(cleaned_data, CHART_CAUSE_PATH)
+    plot_change_chart(cleaned_data, CHART_CHANGE_PATH)
 
 
 if __name__ == "__main__":

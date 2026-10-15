@@ -94,4 +94,3 @@ def clean_and_merge(accidents, operations):
     return final_df
 
 clean = clean_and_merge(df_accidents, df_operations)
-print(clean)
