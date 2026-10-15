@@ -35,6 +35,12 @@ A key limitation is that Operational Data 1.02 is published at the national leve
 The data dictionaries and source documentation will be used to interpret variables, identify missing information, and document the assumptions applied during data cleaning and analysis.
 
 
+# Reproducing the Analysis
+To run the entire analysis in one step (cleaning data, merging data, and building the graphs) you can simply run the `fra_clean.py` file located in the code folder. From the project directory `python code/fra_clean.py`. Below we explain the separate files and functions that make up `far_clean.py`.
+
+## Cleaning the Data
+The two datasets used in this project are the FRA Rail Equipment Accident/Incident Data and the FRA Operational Data. These datasets can be found under the data folder within this repository or can be downloaded from the FRA website directly (linked above). 
+
 ### Limitations
 
 From Will: Percent changes assume a non-zero early-period rate, and NJT's small counts make the percentages volatile compared to the other railroads.
