@@ -11,19 +11,6 @@ OUT_PATH = os.path.join(OUT_DIR, "county.csv")
 df = pd.read_csv(IN_PATH_ACCIDENTS)
 
 
-
-# texas_df = ( 
-#     df.loc[df["State Abbreviation"] == "TX"]
-#     .groupby(["Year", "Accident Month", "County Name"], as_index=False)["Train Speed"]
-#     .mean()
-# )
-
-# texas_year_df = (
-#     df.loc[df["State Abbreviation"] == "TX"]
-#     .groupby(["Year", "County Name"], as_index=False)["Train Speed"]
-#     .mean()            
-# )
-
 monthly = (
     df.groupby(["Year", "Accident Month"])
     .size()
@@ -46,19 +33,18 @@ plt.savefig("eda/eda_artifacts/accidents.png")
 
 visibility_df = df.groupby("Visibility").size()
 
-# vis_plot = visibility_df.plot(
-#     kind="bar", 
-#     xlabel="Visibility Condition",
-#     ylabel="Total Accidents",
-#     title="Breakdown of Accidents by Visibility Condition",
-#     rot=0,
-#     fontsize=12,
-#     figsize=(10,6.5),
-#     )
+vis_plot = visibility_df.plot(
+    kind="bar", 
+    xlabel="Visibility Condition",
+    ylabel="Total Accidents",
+    title="Breakdown of Accidents by Visibility Condition",
+    rot=0,
+    fontsize=12,
+    figsize=(10,6.5),
+    )
 
-# vis_plot.set_title("Breakdown of Accidents by Visbility Condition", fontsize=20)
-# theme.apply_transforms()
-# plt.savefig("visibility.png")
+vis_plot.set_title("Breakdown of Accidents by Visibility Condition", fontsize=18)
+plt.savefig("eda/eda_artifacts/visibility.png")
 
 
 # state_df = df.groupby("State Abbreviation").size()
