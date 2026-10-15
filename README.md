@@ -1,7 +1,9 @@
-# Analysis of U.S. and Canadian Train Deraliments
+# Analyzing U.S. and Canadian Train Derailments
 
-# bevo_big_data
+### bevo_big_data
 
+# Goal of Analysis
+The goal of this project is to analyze train derailments reported by the FRA from 2014-2022. Specifically we want to identify annual fluctuations in train derailments and their associated causes across different railroad companies for the years spanning from 2014 to 2022.
 
 ## Data Sources and Data Collection
 This project uses two datasets provided by the Federal Railroad Administration (FRA), an agency of the U.S. Department of Transportation (USDOT). The datasets provide complementary information: one records reportable railroad accidents and incidents, while the other contains operational data that can be used to measure railroad activity. Combining these sources allows the analysis of accident trends in relation to operational exposure.
@@ -47,3 +49,5 @@ Rate over time = one rate per railroad per year, summed of the four cause rates.
 causes by railroad: years combined, derailments summed over years/ miles summed over years. Each railroad-year's miles counted once.
 change chart - '14 - '16 vs -'20 - '22 rates, percent change = (late-early)/early * 100
 cause groups: Signal merged with miscellaneous due to low numbers - would not be significantly shown if kept separate.
+
+### Findings
