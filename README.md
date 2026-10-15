@@ -83,7 +83,7 @@ The functions that build the graphs can be found in `charts.py`, each of them ta
 - CSX and UP had a massive swing in derailments caused by human factors.
 - NS had a large swing in derailments caused by their locomotives or cars.
 - NJTR had the wildest swings across all cateogories but has the lowest number of both absolute and relative derailments, meaning any small change leads to huge swings in changes of rates.
-#### How derailment rates changed (early period / late period) / early period)
+#### How derailment rates changed (late period rate / early period rate) / early period rate)
 - UP: +32%
 - CN: +22%
 - CSX: +21%
