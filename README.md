@@ -69,19 +69,29 @@ The functions that build the graphs can be found in `charts.py`, each of them ta
 
 ## Findings
 ![Derailments per million train miles by railroad, 2014-2022](artifacts/derailments_over_time.png)
-- UP consistently has one of the highest rate of derailments for how many train miles they run.
+- UP consistently has the highest rate of derailments for how many train miles they run.
 - NJTR by contrast is one of the lowest.
-- Betewen 2018 and 2019, CSX had one of the largest single year decreases in derailment rates out of any company.
+- Betewen 2018 and 2019, CSX had the largest single year decreases in derailment rates out of any company.
 
 ![Derailments per million train miles by railroad](artifacts/derailments_by_cause.png)
-- For relative size of causes to rates, NJTR is almost entirely human factors.
-- Track derailments made up a large majority of their derailments while the other larger railroads have a more even mix.
+- For relative size of causes to rates, NJTR is mostly human factors.
+- Track derailments made up a large majority of "other" derailments while the other larger railroads have a more even mix.
+- human factors is the largest single cause for BNSF, CN, and NJTR
 
 ![Change in rate of derailments by railroad from early period to late period](artifacts/changes_between_periods.png)
-- The share of Misc + Signal accidents for CN and CPCK grew dramatically between periods.
-- CSX an UP had a massive swing in derailments caused by human factors.
-- NS had a large swing in derailments caused by their locomotives.
+- The rate of Misc + Signal accidents for CN and CPCK grew dramatically between periods.
+- CSX and UP had a massive swing in derailments caused by human factors.
+- NS had a large swing in derailments caused by their locomotives or cars.
 - NJTR had the wildest swings across all cateogories but has the lowest number of both absolute and relative derailments, meaning any small change leads to huge swings in changes of rates.
+#### How derailment rates changed (early period / late period) / early period)
+- UP: +32%
+- CN: +22%
+- CSX: +21%
+- NS: +6%
+- BNSF: +5%
+- NJTR: +2%
+- other: +1%
+- CPKC: -13%
 
 
 ## Limitations
