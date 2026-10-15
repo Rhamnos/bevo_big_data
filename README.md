@@ -1,6 +1,6 @@
 # bevo_big_data
 
-### Goal
+## Goal
 Question: How do derailment rates in the US per million train miles change across railroads from 2014 to 2022 and what caused them?
 
 ## Data Sources and Data Collection
