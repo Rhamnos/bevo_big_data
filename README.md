@@ -33,12 +33,9 @@ This project uses two datasets provided by the Federal Railroad Administration (
 
 
 ### Findings
-![Derailments per million train miles by railroad, 2014-2022]
-(artifacts/derailments_over_time.png)
-![Derailments per million train miles by railroad]
-(artifacts/derailments_by_cause.png)
-![Change in rate of derailments by railroad from early period to late period]
-(artifacts/changes_between_periods.png)
+![Derailments per million train miles by railroad, 2014-2022](artifacts/derailments_over_time.png)
+![Derailments per million train miles by railroad](artifacts/derailments_by_cause.png)
+![Change in rate of derailments by railroad from early period to late period](artifacts/changes_between_periods.png)
 
 
 
