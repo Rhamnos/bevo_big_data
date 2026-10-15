@@ -17,6 +17,13 @@ This project uses two datasets provided by the Federal Railroad Administration (
 - The dataset is available in a human-readable format and can be accessed through the USDOT data portal. Users can explore the records online and obtain the data for further analysis through downloadable formats such as CSV and available data-access interfaces.
 - In this project, the dataset serves as the primary source of accident information. It is used to identify derailments, examine their reported causes, and analyze how accident patterns vary across railroads and over time.
 - The accompanying data dictionary documents the dataset's fields and their definitions, supporting the interpretation and selection of relevant variables for the analysis.
+ #### Columns
+- Year: year the figure was reported
+- Reporting Railroad Code: Railroad company reporting the figure
+- Reporting Parent Railroad Code: The company that owns the company reporting the figure
+- Accident Number: The ID for the accident being reported
+- Accident Type: What kind of accident is being reported
+- Primary Accident Cause Code: What caused the accident
 
 ### 2. FRA Operational Data 1.02
 - Official report name: Operational Data 1.02
@@ -27,6 +34,10 @@ This project uses two datasets provided by the Federal Railroad Administration (
 - The report's default display covers one year of data, and the published data are presented per railroad per month, filed under each railroad's headquarters location.Therefore, the company and temporal resolution of the operational data must be considered when combining them with the accident records.
 - In this project, Operational Data 1.02 is used as the source of operational exposure data. The goal is to calculate derailment rates per million train miles and compare accident patterns over time and, where the available data support it, across railroads.
 - The operational dataset complements the Form 54 records by providing a denominator for rate calculations, allowing the analysis to consider not only the number of derailments but also the amount of railroad activity.
+#### Columns
+- Year: year the figure was reported
+- Reporting Parent Railroad Code: The company that ons the company reporting the figure
+- Total Train Miles: The number of miles run by all the trains for that company for any reason
 
 ## Data Integration
 - The two datasets serve different purposes and must be processed separately before they can be combined. Accident records are event-based, whereas operational statistics summarize railroad activity over a defined reporting period. Before calculating rates, the project must ensure that the accident counts and train-mile totals refer to compatible time periods and populations of railroad operations.
