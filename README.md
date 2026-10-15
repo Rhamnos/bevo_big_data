@@ -91,7 +91,7 @@ The functions that build the graphs can be found in `charts.py`, each of them ta
 - BNSF: +5%
 - NJTR: +2%
 - other: +1%
-- CPKC: -13%
+- CPKC: -13% - the only railroad to have a decrease in rate from early period to later period.
 
 
 ## Limitations
