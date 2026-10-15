@@ -106,8 +106,6 @@ def plot_change_chart(change_table, output_path):
     late_totals = late_rates.loc[late_rates["cause_group"] == "Total"].copy()
     early_totals = early_totals.set_index("railroad_group")
     late_totals = late_totals.set_index("railroad_group")
-    early_totals = early_totals.rename()
-    late_totals = late_totals.rename()
 
     colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]
     fig, ax = plt.subplots(figsize=(16, 9))
