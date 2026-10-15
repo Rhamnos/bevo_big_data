@@ -26,15 +26,15 @@ This project uses two datasets provided by the Federal Railroad Administration (
 - In this project, Operational Data 1.02 is used as the source of operational exposure data. The goal is to calculate derailment rates per million train miles and compare accident patterns over time and, where the available data support it, across railroads.
 - The operational dataset complements the Form 54 records by providing a denominator for rate calculations, allowing the analysis to consider not only the number of derailments but also the amount of railroad activity.
 
-### Data Integration
+## Data Integration
 - The two datasets serve different purposes and must be processed separately before they can be combined. Accident records are event-based, whereas operational statistics summarize railroad activity over a defined reporting period. Before calculating rates, the project must ensure that the accident counts and train-mile totals refer to compatible time periods and populations of railroad operations.
 - To connect both datasets, we joined the railroad group and year, after each table is aggregated.
 - The data dictionaries and source documentation will be used to interpret variables, identify missing information, and document the assumptions applied during data cleaning and analysis.
 
-# Reproducing the Analysis
+## Reproducing the Analysis
 All required packages are located in the requirements.txt file. To run the entire analysis in one step (cleaning data, merging data, and building the graphs) you can run the `fra_clean.py` file located in the code folder. From the project directory `python code/fra_clean.py`. Below we explain the separate files and functions that make up `fra_clean.py`.
 
-## Cleaning and Merging the Data
+### Cleaning and Merging the Data
 The two datasets used in this project are the FRA Rail Equipment Accident/Incident Data and the FRA Operational Data. These datasets can be found under the data folder within this repository or can be downloaded from the FRA website directly (linked above). The `clean.py` file converts both data sets into pandas data frames, cleans them, and merges them into one data frame containing the columns "year", "railroad_group", "cause_group", "derailments", "total miles", and "rate_per_million_miles". 
 ### Clean Data
 The first step is to clean and filter both data sets to get them to a point where they can be joined together. The function `clean_accidents` takes in the pandas data frame of the accidents data set labeled `df_accidents` and returns a new data frame that aggregates total derailments by cause, for each of the 8 companies, by year. The function `clean_operations` takes in the pandas data frame of the operations data set labeled `df_operations` and returns a data frame that aggregates total operation miles per company per year.
@@ -43,11 +43,11 @@ The function `merge_dfs` takes in the two new data frames created in the cleanin
 ### Final Clean
 The `change_names` function converts each of the column names from the original dataset into snake case. The final function `clean_and_merge` combines the previous functions into one callable function that takes both of the uncleaned data frames as inputs and produces the final cleaned and merged data frame.
 
-## Graphing the Data
+### Graphing the Data
 From Josh: Include Description of graphing
 
 
-### Findings
+## Findings
 ![Derailments per million train miles by railroad, 2014-2022](artifacts/derailments_over_time.png)
 ![Derailments per million train miles by railroad](artifacts/derailments_by_cause.png)
 ![Change in rate of derailments by railroad from early period to late period](artifacts/changes_between_periods.png)
@@ -55,7 +55,7 @@ From Josh: Include Description of graphing
 
 
 
-### Methodology
+## Methodology
 From Will: Rate = derailments / (Total Train Miles(TTM)/1,000,000) TTM includes Yard Switching Miles.
 Groups: tope 7 railroads by parent company plus other (BNSF, UP, NS, CSX, CPKC, CN, NJTR)
 Rate over time = one rate per railroad per year, summed of the four cause rates.
@@ -63,7 +63,7 @@ causes by railroad: years combined, derailments summed over years/ miles summed 
 change chart - '14 - '16 vs -'20 - '22 rates, percent change = (late-early)/early * 100
 cause groups: Signal merged with miscellaneous due to low numbers - would not be significantly shown if kept separate.
 
-### Limitations
+## Limitations
 - A key limitation is that Operational Data 1.02 is published per railroad according to the data. Therefore, regional derailment rates require operational exposure data broken down by the corresponding FRA regions. If suitable regional train-mile data are unavailable, per-railroad rates can still be calculated, but they cannot be interpreted as regional rates. The project will document this limitation and adjust the analysis to match the geographic resolution supported by the data.
 - Miles by state, region, or line do not exist and so accident data cannot be used alongside operational data to find geographical differences.
 - Amtrak, the national passenger railroad service, is not included in the data set
