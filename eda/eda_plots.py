@@ -4,8 +4,6 @@ from matplotlib import pyplot as plt
 
 IN_PATH_ACCIDENTS = os.path.join("data", "Rail_Equipment_Accident_Incident_Data_(Form_54)_20261008.csv")
 IN_PATH_OPERATIONS = os.path.join("data", "Operational Data_Full Data_data_Use_This.csv")
-OUT_DIR = "data"
-OUT_PATH = os.path.join(OUT_DIR, "county.csv")
 
 
 df = pd.read_csv(IN_PATH_ACCIDENTS)
@@ -45,19 +43,6 @@ vis_plot = visibility_df.plot(
 
 vis_plot.set_title("Breakdown of Accidents by Visibility Condition", fontsize=18)
 plt.savefig("eda/eda_artifacts/visibility.png")
-
-
-# state_df = df.groupby("State Abbreviation").size()
-
-# state_plot = state_df.plot(
-#     kind="bar",
-#     xlabel= "State",
-#     ylabel="Total Accidents",
-#     title="Breakdown of Accidents by State",
-#     fontsize=10,
-# )
-# theme.apply_transforms()
-# plt.savefig("state_accidents.png")
 
 
 
